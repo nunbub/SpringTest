@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+  <mapper namespace="com.nunbub.test.mybatis.dao.RealEstateDAO">
+  
+  	<select id="selectRealEstate" parameterType="int"
+  			resultType="com.nunbub.test.mybatis.model.RealEstate">
+  		SELECT
+  			`id`
+  			, `realtorId`
+  			, `address`
+  			, `area`
+  			, `type`
+  			, `price`
+  			, `rentPrice`
+  			, `createdAt`
+  			, `updatedAt`
+  		FROM
+  			`real_estate`
+  		WHERE
+  			`id` = #{id}		
+  	
+  	</select>
+  	
+  	<select id="selectRealEstateAsRent" parameterType="int"
+  			resultType="com.nunbub.test.mybatis.model.RealEstate">
+  			
+  		SELECT
+  			`id`
+  			, `realtorId`
+  			, `address`
+  			, `area`
+  			, `type`
+  			, `price`
+  			, `rentPrice`
+  			, `createdAt`
+  			, `updatedAt`
+  		FROM
+  			`real_estate`
+  		WHERE
+  			<![CDATA[`rentPrice` < #{rentPrice}]]>
+  					
+  	
+  	</select>
+  	
+  	<select id="selectRealEstateAsAreaPrice" parameterType="int"
+  			resultType="com.nunbub.test.mybatis.model.RealEstate">
+  		SELECT
+  			`id`
+  			, `realtorId`
+  			, `address`
+  			, `area`
+  			, `type`
+  			, `price`
+  			, `rentPrice`
+  			, `createdAt`
+  			, `updatedAt`
+  		FROM
+  			`real_estate`
+  		WHERE
+  		<![CDATA[
+  			`type` = '매매'
+  			AND `area` >= #{area}
+  			AND `price` <= #{price}		
+  		]]>
+  	
+  	</select>
+  	
+  	<insert id="insertRealEstateByObject" parameterType="com.nunbub.test.mybatis.model.RealEstate">
+  		INSERT INTO
+  			`real_estate`
+  		(
+  			`realtorId`
+  			, `address`
+  			, `area`
+  			, `type`
+  			, `price`
+  			, `rentPrice`
+  			, `createdAt`
+  			, `updatedAt`  		
+  		)	
+  		VALUES
+  		(
+  			#{realtorId}
+  			, #{address}
+  			, #{area}
+  			, #{type}
+  			, #{price}
+  			, #{rentPrice}
+  			, now()
+  			, now()  		
+  		)
+  	
+  	
+  	</insert>
+  
+  
+  </mapper>
