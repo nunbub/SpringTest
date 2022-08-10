@@ -10,19 +10,36 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<title>seller info</title>
+<title>realtor Info</title>
 </head>
 <body>
+
 	<div class="container">
+		<h1>공인중개사 정보</h1>
+		<table class="table">
+			<tr>
+				<th>ID</th>
+				<td>${realtor.id }</td>
+			</tr>
+			<tr>
+				<th>상호명</th>
+				<td>${realtor.office }</td>
+			</tr>
+			<tr>
+				<th>전화번호</th>
+				<td>${realtor.phoneNumber }</td>
+			</tr>
+			<tr>
+				<th>주소</th>
+				<td>${realtor.address }</td>
+			</tr>
+			<tr>
+				<th>등급</th>
+				<td>${realtor.grade }</td>
+			</tr>
+			
+		</table>
 	
-		<h1>판매자 정보</h1>
-	
-		<image width="200" src="${seller.profileImage}">
-		
-		<div class="display-4">${seller.nickname }</div>
-		
-		<h3 class="text-warning">${seller.temperature }</h3>
-		
 	</div>
 
 </body>

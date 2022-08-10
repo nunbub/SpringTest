@@ -10,19 +10,20 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
 
-<title>seller info</title>
+<title>realtor Input</title>
 </head>
 <body>
+
 	<div class="container">
+		<h1>공인중개사 추가</h1>
 	
-		<h1>판매자 정보</h1>
-	
-		<image width="200" src="${seller.profileImage}">
-		
-		<div class="display-4">${seller.nickname }</div>
-		
-		<h3 class="text-warning">${seller.temperature }</h3>
-		
+		<form method="get" action="/jsp/realtor/add">
+			<label>상호명</label><input type="text" class="form-control col-6" name="office">
+			<label>전화번호</label><input type="text" class="form-control col-6"name="phoneNumber">
+			<label>주소</label><input type="text" class="form-control col-6" name="address">
+			<label>등급</label><input type="text" class="form-control col-6" name="grade">
+			<button type="submit" class="btn btn-primary mt-3">추가</button>
+		</form>
 	</div>
 
 </body>

@@ -38,11 +38,30 @@ public class SellerController {
 	
 	@GetMapping("/lastSeller")
 	public String sellerInfo(Model model) {
-		Seller lastSeller = sellerBO.getLastSeller();
+		Seller seller = sellerBO.getLastSeller();
 		
-		model.addAttribute("seller", lastSeller);
+		model.addAttribute("seller", seller);
 		
 		return "jsp/sellerInfo";
+	}
+	
+	@GetMapping("/info")
+	public String sellerInfoById(
+			@RequestParam(value="id", required=false) Integer id
+			, Model model) {
+		
+		Seller seller = null;
+		// id가 null일 경우 가장 최근 사용자 가져오기
+		if(id == null) {
+			seller = sellerBO.getLastSeller();
+		}else {
+			// null이 아닐경우 id 기반으로 조회
+			seller = sellerBO.getSeller(id);
+		}
+		model.addAttribute("seller", seller);
+		
+		return "jsp/sellerInfo";
+		
 	}
 	
 }

@@ -20,4 +20,7 @@ public class SellerBO {
 		return sellerDAO.selectLastSeller();
 	}
 	
+	public Seller getSeller(int id) {
+		return sellerDAO.selectSeller(id);
+	}
 }
