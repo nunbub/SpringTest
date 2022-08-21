@@ -179,5 +179,10 @@ public class JSTLController {
 		return "jstl/test04";
 	}
 	
+	@GetMapping("/test05")
+	public String test05() {
+		
+		return "jstl/test05";
+	}
 	
 }
