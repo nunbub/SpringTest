@@ -24,4 +24,15 @@ public class WebsiteBO {
 		
 		return websiteDAO.insertWebsite(name, url);
 	}
+	
+	public boolean isDuplicateUrl(String url) {
+		
+		int count = websiteDAO.selectCountUrl(url);
+		
+		if(count == 0) {
+			return false;
+		}else {
+			return true;
+		}
+	}
 }

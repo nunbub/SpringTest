@@ -26,8 +26,10 @@
 			<input type="text" class="form-control" id="titleInput">
 			
 			<label>주소</label>
-			<input type="text" class="form-control" id="urlInput">
-			
+			<div class="d-flex">
+				<input type="text" class="form-control col-10" id="urlInput"> 
+				<button type="button" id="checkBtn" class="btn btn-info text-white col-2 ml-1">중복확인</button>
+			</div>
 			<button type="button" id="addBtn" class="btn btn-success btn-block mt-3">추가</button>
 		
 		<!-- </form> -->
@@ -37,6 +39,39 @@
 	<script>
 	
 		$(document).ready(function(){
+			
+			$("#checkBtn").on("click", function(){
+				
+				let url = $("#urlInput").val();
+				
+				if(url == "") {
+					alert("주소를 입력하세요.");
+					return ;
+				}
+				
+				if(!(url.startsWith("http://") || url.startsWith("https://"))) {
+					alert("주소 형식이 잘못되었습니다.");
+					return ;
+				}
+				
+				$.ajax({
+					type:"post"
+					, url:"/ajax/website/is_duplicate"
+					, data:{"url":url}
+					, success:function(data){
+						
+						if(data.is_duplicate) {
+							alert("중복된 url 입니다.");
+						}else{
+							alert("저장 가능한 url 입니다.");
+						}
+					}
+					, error:function(){
+						alert("중복 확인 에러");
+					}
+				})
+				
+			})
 			
 			$("#addBtn").on("click", function(){
 				

@@ -36,5 +36,14 @@
   		)	
   	
   	</insert>
+  	
+  	<select id="selectCountUrl" parameterType="string" resultType="int">
+  		SELECT
+  			count(1)
+  		FROM
+  			`website`
+  		WHERE
+  			`url` = #{url}		
+  	</select>
   
   </mapper>

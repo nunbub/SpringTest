@@ -58,5 +58,22 @@ public class WebsiteController {
 		return map;
 		
 	}
+	
+	@PostMapping("/is_duplicate")
+	@ResponseBody
+	public Map<String, Boolean> isDuplicate(@RequestParam("url") String url) {
+		
+		boolean isDuplicate = websiteBO.isDuplicateUrl(url);
+		
+		Map<String, Boolean> map = new HashMap<>();
+		
+		if(isDuplicate) {
+			map.put("is_duplicate", true);
+		}else {
+			map.put("is_duplicate", false);
+		}
+		
+		return map;
+	}
 
 }
