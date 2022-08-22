@@ -31,10 +31,10 @@
 		<tbody>
 			<c:forEach var="website" items="${websiteList }" varStatus="status">
 				<tr>
-					<td>${status.count }</td>
+					<td>${website.id  }</td>
 					<td>${website.name }</td>
 					<td>${website.url }</td>
-					<td><button type="button" class="btn btn-danger btn-sm">삭제</button></td>
+					<td><button type="button" class="btn btn-danger btn-sm delete-btn" data-website-id="${website.id }">삭제</button></td>
 				</tr>
 			</c:forEach>
 		</tbody>
@@ -43,6 +43,29 @@
 	<script>
 	
 		$(document).ready(function(){
+			// class 속성을 활용해서 이벤트를 등록 ( 여러 버튼에 같은 이벤트를 등록하기 위해서)
+			$(".delete-btn").on("click", function(){
+				
+				// 현재 이벤트가 발생한 버튼 객체 가져오기 $(this)
+				// 해당 버튼 객체에 삭제 대상 id 가 포함되어 있어야한다 ( data 속성)
+				let websiteId = $(this).data("website-id");
+				
+				$.ajax({
+					type:"get"
+					, url:"/ajax/website/delete"
+					, data:{"id":websiteId}
+					, success:function(data) {
+						if(data.result == "success"){
+							location.reload(); // 새로고침
+						}else {
+							alert("삭제 실패");
+						}
+					}
+					, error:function() {
+						alert("삭제 에러");
+					}
+				});
+			});
 			
 			
 			

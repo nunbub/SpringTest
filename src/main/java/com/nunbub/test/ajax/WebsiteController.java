@@ -67,10 +67,29 @@ public class WebsiteController {
 		
 		Map<String, Boolean> map = new HashMap<>();
 		
-		if(isDuplicate) {
-			map.put("is_duplicate", true);
+//		if(isDuplicate) {
+//			map.put("is_duplicate", true);
+//		}else {
+//			map.put("is_duplicate", false);
+//		}
+		map.put("is_duplicate", isDuplicate);
+		
+		return map;
+	}
+	
+	// id를 기반으로 즐겨찾기를 삭제하는 기능 api
+	// {"result":"success"} or {"result":"fail"}
+	@GetMapping("/delete")
+	@ResponseBody
+	public Map<String, String> deleteWebsite(@RequestParam("id") int id) {
+		
+		int count = websiteBO.deleteWebsite(id);
+		Map<String, String> map = new HashMap<>();
+		
+		if(count == 1) {
+			map.put("result", "success");
 		}else {
-			map.put("is_duplicate", false);
+			map.put("result", "fail");
 		}
 		
 		return map;

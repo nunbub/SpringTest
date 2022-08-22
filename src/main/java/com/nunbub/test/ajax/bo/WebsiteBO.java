@@ -27,12 +27,20 @@ public class WebsiteBO {
 	
 	public boolean isDuplicateUrl(String url) {
 		
-		int count = websiteDAO.selectCountUrl(url);
+//		int count = websiteDAO.selectCountUrl(url);
 		
-		if(count == 0) {
-			return false;
-		}else {
-			return true;
-		}
+//		return count != 0;
+		
+//		if(count == 0) {
+//			return false;
+//		}else {
+//			return true;
+//		}
+		
+		return websiteDAO.selectCountUrl(url) != 0;
+	}
+	
+	public int deleteWebsite(int id) {
+		return websiteDAO.deleteWebsite(id);
 	}
 }

@@ -17,4 +17,6 @@ public interface WebsiteDAO {
 			, @Param("url") String url);
 	
 	public int selectCountUrl(@Param("url") String url);
+	
+	public int deleteWebsite(@Param("id") int id);
 }

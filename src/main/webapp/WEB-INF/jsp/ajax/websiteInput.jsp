@@ -28,8 +28,10 @@
 			<label>주소</label>
 			<div class="d-flex">
 				<input type="text" class="form-control col-10" id="urlInput"> 
-				<button type="button" id="checkBtn" class="btn btn-info text-white col-2 ml-1">중복확인</button>
+				<button type="button" id="checkBtn" class="btn btn-info">중복확인</button>
 			</div>
+			<div class="text-danger small d-none" id="duplicateDiv">중복된 URL 입니다</div>
+			<div class="text-success small d-none" id="availableDiv">사용가능한 URL 입니다</div>	
 			<button type="button" id="addBtn" class="btn btn-success btn-block mt-3">추가</button>
 		
 		<!-- </form> -->
@@ -39,6 +41,21 @@
 	<script>
 	
 		$(document).ready(function(){
+			
+			// 중복체크 확인 상태 저장 변수
+			var isCheck = false;
+			// 중복 상태 저장 변수
+			var isDuplicateUrl = true;
+			
+			$("#urlInput").on("input", function() {
+				// 중복체크 확인 상태를 초기화
+				isCheck = false;
+				isDuplicateUrl = true;
+				
+				$("#duplicateDiv").addClass("d-none");
+				$("#availableDiv").addClass("d-none");
+				
+			});
 			
 			$("#checkBtn").on("click", function(){
 				
@@ -60,10 +77,18 @@
 					, data:{"url":url}
 					, success:function(data){
 						
+						isCheck = true;
+						
 						if(data.is_duplicate) {
-							alert("중복된 url 입니다.");
+							isDuplicateUrl = true;
+							
+							$("#duplicateDiv").removeClass("d-none");
+							$("#availableDiv").addClass("d-none");
 						}else{
-							alert("저장 가능한 url 입니다.");
+							isDuplicateUrl = false;
+							
+							$("#duplicateDiv").addClass("d-none");
+							$("#availableDiv").removeClass("d-none");
 						}
 					}
 					, error:function(){
@@ -95,6 +120,18 @@
 					return ;
 				}
 				
+				// url 중복 체크 여부 확인
+				
+				// 중복체크 여부 확인
+				if(!isCheck){
+					alert("주소 중복체크 여부 확인해주세요");
+					return ;
+				}
+				// 중복상태 여부 확인
+				if(isDuplicateUrl){
+					alert("중복된 url 입니다");
+					return ;
+				}
 				// api 호출
 				$.ajax({
 					type:"post"
