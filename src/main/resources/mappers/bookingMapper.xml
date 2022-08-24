@@ -20,6 +20,60 @@
   		FROM
   			`booking`	
   	</select>
+  	
+  	<delete id="deleteBooking" parameterType="int">
+  		DELETE FROM
+  			`booking`
+  		WHERE
+  			`id` = #{id}	
+   	</delete>
+   	
+   	<insert id="insertBooking" parameterType="map">
+   		INSERT INTO
+   			`booking`
+   		(
+   			`name`
+  			, `headcount`
+  			, `day`
+  			, `date`
+  			, `phoneNumber`
+  			, `state`
+  			, `createdAt`
+  			, `updatedAt`
+  		)	
+   		VALUES
+   		(
+   			#{name}
+   			, #{headcount}
+   			, #{day}
+   			, #{date}
+   			, #{phoneNumber}
+   			, #{state}
+   			, now()
+   			, now()
+   		)
+   		
+   	</insert>
   
+  	<select id="selectBooking" parameterType="map" resultType="com.nunbub.test.ajax.model.Booking">
+  		SELECT
+  			`id`
+  			, `name`
+  			, `headcount`
+  			, `day`
+  			, `date`
+  			, `phoneNumber`
+  			, `state`
+  			, `createdAt`
+  			, `updatedAt`
+  		FROM
+  			`booking`
+  		WHERE
+  			`name` = #{name}
+  			AND `phoneNumber` = #{phoneNumber}	
+  			
+  	
+  	
+  	</select>
   
   </mapper>
